@@ -105,7 +105,7 @@
           copy: false
           src: "/tmp/kibana-{{ kibana_version }}-linux-x86_64.tar.gz"
           dest: "{{ kibana_home }}"
-          mode: 0644
+          mode: 0755
           extra_opts: [--strip-components=1]
           creates: "{{ kibana_home }}/bin/kibana"
         tags:
