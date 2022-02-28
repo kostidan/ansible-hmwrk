@@ -1,3 +1,4 @@
-/*-role
+**/filebeat-role
+**/kibana-role
 **/files
 **/roles

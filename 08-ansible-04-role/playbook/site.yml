@@ -1,0 +1,14 @@
+---
+- name: Assert elasticrole
+  hosts: all
+  roles:
+    - elastic_role
+- name: Assert kibanarole
+  hosts: all
+  roles:
+    - kibana_role
+- name: Assert kibanarole
+  hosts: all
+  roles:
+    - filebeat_role
+    
