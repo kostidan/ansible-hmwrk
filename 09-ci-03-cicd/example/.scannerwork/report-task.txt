@@ -1,0 +1,6 @@
+projectKey=Netology
+serverUrl=http://51.250.107.161:9000
+serverVersion=9.1.0.47736
+dashboardUrl=http://51.250.107.161:9000/dashboard?id=Netology
+ceTaskId=AX_R6_CdfH7Q246IV0iA
+ceTaskUrl=http://51.250.107.161:9000/api/ce/task?id=AX_R6_CdfH7Q246IV0iA
