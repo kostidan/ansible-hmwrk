@@ -1137,18 +1137,39 @@
 
 5. Создать Scripted Pipeline, наполнить его скриптом из [pipeline](./pipeline).
 6. Внести необходимые изменения, чтобы Pipeline запускал `ansible-playbook` без флагов `--check --diff`, если не установлен параметр при запуске джобы (prod_run = True), по умолчанию параметр имеет значение False и запускает прогон с флагами `--check --diff`.
+
+    ```
+    node('ansible'){
+        stage('Checkout') {
+            git branch: 'main', credentialsId: '23920420-e23b-464e-ba4a-bdc56cec9944', url: 'git@github.com:kostidan/elk-ansible.git'
+        }
+        stage('Install requirements') {
+            sh 'pip3 install -r requirements.txt'
+            sh 'ansible-galaxy install --roles-path ./roles/ -r requirements.yml'
+        }
+        stage('Run Playbook'){
+            if ( "${prod_run}" == "true" ){
+                sh 'ansible-playbook -i inventory/hosts.yml site.yml'
+            }
+            else{
+                sh 'ansible-playbook -i inventory/hosts.yml site.yml --check --diff'
+            }
+            // Clean workspace after testing
+            cleanWs()
+        }
+    }
+    ```
+
 7. Проверить работоспособность, исправить ошибки, исправленный Pipeline вложить в репозиторий в файл `ScriptedJenkinsfile`. Цель: получить собранный стек ELK в Ya.Cloud.
+
+- <details><summary>Скриншот (#1 prod_run="true" #2 prod_run="false")</summary>
+
+    ![](assets/04.jpg)
+
+</details>
+
 8. Отправить две ссылки на репозитории в ответе: с ролью и Declarative Pipeline и c плейбукой и Scripted Pipeline.
 
-## Необязательная часть
+    https://github.com/kostidan/mnt-homeworks-ansible
+    https://github.com/kostidan/elk-ansible
 
-1. Создать скрипт на groovy, который будет собирать все Job, которые завершились хотя бы раз неуспешно. Добавить скрипт в репозиторий с решеним с названием `AllJobFailure.groovy`.
-2. Дополнить Scripted Pipeline таким образом, чтобы он мог сначала запустить через Ya.Cloud CLI необходимое количество инстансов, прописать их в инвентори плейбука и после этого запускать плейбук. Тем самым, мы должны по нажатию кнопки получить готовую к использованию систему.
-
----
-
-### Как оформить ДЗ?
-
-Выполненное домашнее задание пришлите ссылкой на .md-файл в вашем репозитории.
-
----
