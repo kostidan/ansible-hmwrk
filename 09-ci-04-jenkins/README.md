@@ -1171,5 +1171,6 @@
 8. Отправить две ссылки на репозитории в ответе: с ролью и Declarative Pipeline и c плейбукой и Scripted Pipeline.
 
     https://github.com/kostidan/mnt-homeworks-ansible
+    
     https://github.com/kostidan/elk-ansible
 
